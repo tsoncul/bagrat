@@ -11,17 +11,50 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
 
     private bool m_MouseLookActive = true;
+    private bool m_PlayerWalkActive = true;
+
+    private GameObject objectInHand;
+
     // Use this for initialization
     void Start()
     {
         cameraTransform = Camera.main.GetComponent<Transform>();
         rb = GetComponent<Rigidbody>();
-
     }
 
     // Update is called once per frame
     void Update()
     {
+        HandlePlayerInputs();
+
+    }
+
+
+    private void HandlePlayerInputs()
+    {
+        // Interact button press
+        if (Input.GetButtonDown("Fire1"))
+        {
+            // Pick Up or Interact
+        }
+
+        // Interact button release
+        if (Input.GetButtonUp("Fire1"))
+        {
+            // Release held object
+        }
+
+        // Hold "Rotate" button
+        if (Input.GetButton("Fire2"))
+        {
+            m_MouseLookActive = false;
+        }
+        else
+        {
+            m_MouseLookActive = true;
+        }
+
+        // Rotate player viewport
         if (m_MouseLookActive)
         {
             // Rotate entire player on mouse X
@@ -31,14 +64,16 @@ public class PlayerController : MonoBehaviour
 
             cameraTransform.localRotation = ClampRotationAroundXAxis(cameraTransform.localRotation);
         }
-        // Move and strafe
-        Vector3 moveDelta = transform.right * Input.GetAxis("Horizontal") + transform.forward * Input.GetAxis("Vertical");
-        //rb.velocity = moveDelta * walkSpeed;
-        rb.MovePosition(rb.position + moveDelta * walkSpeed * Time.deltaTime);
 
-        //rb.position += moveDelta * walkSpeed * Time.deltaTime;
+        // Move and strafe
+        if (m_PlayerWalkActive)
+        {
+            Vector3 moveDelta = transform.right * Input.GetAxis("Horizontal") + transform.forward * Input.GetAxis("Vertical");
+            rb.MovePosition(rb.position + moveDelta * walkSpeed * Time.deltaTime); 
+        }
 
     }
+
 
     Quaternion ClampRotationAroundXAxis(Quaternion q)
     {
