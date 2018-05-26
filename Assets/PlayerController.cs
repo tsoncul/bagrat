@@ -22,14 +22,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Move and strafe
-        Vector3 moveDelta = transform.right * Input.GetAxis("Horizontal") + transform.forward * Input.GetAxis("Vertical");
-        //rb.velocity = moveDelta * walkSpeed;
-        rb.MovePosition(rb.position + moveDelta * walkSpeed * Time.deltaTime);
-
-        //rb.position += moveDelta * walkSpeed * Time.deltaTime;
-
-
         if (m_MouseLookActive)
         {
             // Rotate entire player on mouse X
@@ -39,6 +31,13 @@ public class PlayerController : MonoBehaviour
 
             cameraTransform.localRotation = ClampRotationAroundXAxis(cameraTransform.localRotation);
         }
+        // Move and strafe
+        Vector3 moveDelta = transform.right * Input.GetAxis("Horizontal") + transform.forward * Input.GetAxis("Vertical");
+        //rb.velocity = moveDelta * walkSpeed;
+        rb.MovePosition(rb.position + moveDelta * walkSpeed * Time.deltaTime);
+
+        //rb.position += moveDelta * walkSpeed * Time.deltaTime;
+
     }
 
     Quaternion ClampRotationAroundXAxis(Quaternion q)
