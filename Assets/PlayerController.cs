@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
 
     public float walkSpeed = 10.0f;
+    public float interactDistance = 5.0f;
 
     private Transform cameraTransform;
     private Rigidbody rb;
@@ -13,7 +14,7 @@ public class PlayerController : MonoBehaviour
     private bool m_MouseLookActive = true;
     private bool m_PlayerWalkActive = true;
 
-    private GameObject objectInHand;
+    private InteractionController objectInHand;
 
     // Use this for initialization
     void Start()
@@ -26,15 +27,48 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         HandlePlayerInputs();
-
     }
 
+    private void FixedUpdate()
+    {
+        
+        HandleCarriedObject();
+    }
+
+    private void HandleCarriedObject()
+    {
+        if (objectInHand != null)
+        {
+            objectInHand.GetComponent<Rigidbody>().MovePosition(cameraTransform.position + cameraTransform.forward * 3f);
+        }
+    }
 
     private void HandlePlayerInputs()
     {
         // Interact button press
         if (Input.GetButtonDown("Fire1"))
         {
+            // Check for interactable object in center
+
+            RaycastHit hit;
+
+            if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, interactDistance))
+            {
+                InteractionController inter = hit.collider.GetComponent<InteractionController>();
+                if (inter != null)
+                {
+                    if (inter.isCarryable)
+                    {
+                        objectInHand = inter;
+                        inter.OnPickup();
+                    } else
+                    {
+                        inter.OnInteract();
+                    }
+                
+                }
+            }
+
             // Pick Up or Interact
         }
 
@@ -42,12 +76,23 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonUp("Fire1"))
         {
             // Release held object
+            if (objectInHand)
+            {
+                objectInHand.OnDrop();
+                objectInHand = null;
+            }
         }
 
         // Hold "Rotate" button
         if (Input.GetButton("Fire2"))
         {
-            m_MouseLookActive = false;
+            if (objectInHand)
+            {
+                m_MouseLookActive = false;
+                //objectInHand.GetComponent<Transform>().Rotate(Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"), 0.0f);
+                objectInHand.GetComponent<Transform>().Rotate(new Vector3(Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"), 0.0f));
+            }
+
         }
         else
         {
