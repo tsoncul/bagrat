@@ -6,7 +6,7 @@ public class InteractionController : MonoBehaviour {
 
     public bool isCarryable = false;
     public string publicName;
-
+    public bool straining = false;
 	// Use this for initialization
 	void Start () {
 		
@@ -16,6 +16,21 @@ public class InteractionController : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    private void OnCollisionStay(Collision collision)
+    {
+        
+        if (collision.impulse.magnitude > 0.2f)
+        {
+            Debug.Log("Breakaway!");
+            straining = true;
+        } else
+        {
+            straining = false;
+        }
+        
+        //Debug.Log(collision.impulse.magnitude);
+    }
 
     public void OnInteract()
     {
@@ -29,6 +44,7 @@ public class InteractionController : MonoBehaviour {
 
     public void OnDrop() {
         GetComponent<Rigidbody>().useGravity = true;
+        straining = false;
     }
     
 }

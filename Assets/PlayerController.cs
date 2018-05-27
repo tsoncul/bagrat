@@ -31,7 +31,6 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        
         HandleCarriedObject();
     }
 
@@ -40,6 +39,11 @@ public class PlayerController : MonoBehaviour
         if (objectInHand != null)
         {
             objectInHand.GetComponent<Rigidbody>().MovePosition(cameraTransform.position + cameraTransform.forward * 3f);
+            if (objectInHand.straining)
+            {
+                objectInHand.OnDrop();
+                objectInHand = null;
+            }
         }
     }
 
@@ -70,6 +74,12 @@ public class PlayerController : MonoBehaviour
             }
 
             // Pick Up or Interact
+        }
+
+        // Interact button continued check
+        if (Input.GetButton("Fire1"))
+        {
+
         }
 
         // Interact button release
