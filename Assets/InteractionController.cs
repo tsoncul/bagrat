@@ -22,7 +22,7 @@ public class InteractionController : MonoBehaviour {
         
         if (collision.impulse.magnitude > 0.2f)
         {
-            Debug.Log("Breakaway!");
+            
             straining = true;
         } else
         {
