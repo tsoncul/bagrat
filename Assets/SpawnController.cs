@@ -2,32 +2,47 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnController : MonoBehaviour {
+public class SpawnController : MonoBehaviour
+{
 
     float countdown = 1f;
     public GameObject luggage;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    Flight flt;
+
+    // Use this for initialization
+    void Start()
+    {
+        flt = new Flight("BJN", new System.DateTime());
+        Debug.Log(flt.baggages);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         countdown -= Time.deltaTime;
 
         if (countdown < 0)
         {
-            countdown = Random.Range(6f, 12f);
+            countdown = Random.Range(0.5f, 1.2f);
+            if (flt.baggages.Count > 0)
+            {
+                Baggage bag = flt.baggages[0];
+                flt.baggages.Remove(bag);
 
-            GameObject bag = Instantiate(luggage, transform.position, transform.rotation);
+                GameObject bagObject = Instantiate(luggage, transform.position, transform.rotation);
+                LuggageController lc = bagObject.GetComponent<LuggageController>();
+                lc.CreateLuggageData(bag);
+                lc.BakeValues();
 
-            LuggageController lc = bag.GetComponent<LuggageController>();
+            }
+
             //lc.enabled = false;
-            lc.CreateLuggageData(LuggageController.LuggageType.DEPARTURE, "TXL", "HOM", new Vector3(1f, 1f, 1f), Color.red, "Smith", "GFSAFW");
-            lc.BakeValues();
+            //lc.CreateLuggageData(LuggageController.LuggageType.DEPARTURE, "TXL", "HOM", new Vector3(1f, 1f, 1f), Color.red, "Smith", "GFSAFW");
+            //lc.CreateLuggageData(flt.baggages.)
+            //lc.BakeValues();
             //lc.enabled = true;
-            
+
         }
-	}
+    }
 }

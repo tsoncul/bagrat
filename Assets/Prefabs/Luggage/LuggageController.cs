@@ -12,7 +12,9 @@ public class LuggageController : MonoBehaviour {
 
     private string destination;
     private LuggageType luggageType = LuggageType.DEPARTURE;
-    
+
+    private Baggage baggageData;
+
     // Need data for:
     // Type: departure, arrival, transfer
     // Destination, Provenance...
@@ -34,21 +36,14 @@ public class LuggageController : MonoBehaviour {
         //Debug.Log(tagRenderer.name);
         tagText = tagRenderer.GetComponentInChildren<UnityEngine.UI.Text>();
 
-        isStarted = true;
-    }
-
-    // Create random data
-    public void RandomizeValues()
-    {
-
     }
 
     // Receive luggage data (from GameController, etc.)
-    public void CreateLuggageData(LuggageType type, string destination, string provenance, Vector3 size, Color color, string pax, string pnr)
+    public void CreateLuggageData(Baggage baggage)
     {
-        luggageType = type;
-        this.destination = destination;
+        baggage.luggageController = this;
 
+        baggageData = baggage;
     }
 
     // Use this to bake all values into the game, including
@@ -57,19 +52,19 @@ public class LuggageController : MonoBehaviour {
     // The luggage is invalid if not baked.
     public void BakeValues()
     {
-        Debug.Log(isStarted);
-
         // Set appropriate color for tag.
         tagRenderer.material.color = Color.green;
 
         // Set luggage color
-        GetComponent<Renderer>().material.color = Color.gray;
+        //GetComponent<Renderer>().material.color = Color.gray;
+        GetComponent<Renderer>().material.color = baggageData.Color;
 
         // Set luggage size
-        transform.localScale = new Vector3(Random.Range(0.8f, 1.2f), Random.Range(0.6f, 1.0f), Random.Range(0.8f, 1.5f));
+        //transform.localScale = new Vector3(Random.Range(0.8f, 1.2f), Random.Range(0.6f, 1.0f), Random.Range(0.8f, 1.5f));
+        transform.localScale = baggageData.BagSize;
         //tagRenderer.GetComponent<Transform>().localPosition = new Vector3(0.0f, transform.localScale.y / 2 + 0.1f, 0.0f);
 
-        tagText.text = destination;
+        tagText.text = baggageData.Destination;
 
 
 
@@ -83,4 +78,5 @@ public class LuggageController : MonoBehaviour {
         ARRIVAL,
         TRANSFER
     }
+
 }
