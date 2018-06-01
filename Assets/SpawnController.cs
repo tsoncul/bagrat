@@ -13,7 +13,7 @@ public class SpawnController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        flt = new Flight("BJN", new System.DateTime());
+        flt = new Flight("BJN", new System.DateTime(), Flight.FlightType.DEPARTURE);
         Debug.Log(flt.baggages);
     }
 

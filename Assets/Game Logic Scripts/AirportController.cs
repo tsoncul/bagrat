@@ -19,6 +19,10 @@ public class AirportController : MonoBehaviour {
 
     }
 
+    // Flights Register
+    private List<Flight> dailyFlights;
+    private List<Flight> dailyArrivals;
+
     public List<Flight> DailyFlights
     {
         get
@@ -27,8 +31,14 @@ public class AirportController : MonoBehaviour {
         }
     }
 
-    // Flights Register
-    private List<Flight> dailyFlights;
+    public List<Flight> DailyArrivals
+    {
+        get
+        {
+            return dailyArrivals;
+        }
+    }
+
 
     // Use this for initialization
     void Start () {
@@ -38,10 +48,12 @@ public class AirportController : MonoBehaviour {
 
         // Initialize the daily flights list
         dailyFlights = new List<Flight>();
-        FlightManager.PopulateDailyFlights(dailyFlights);
+        dailyArrivals = new List<Flight>();
+        FlightManager.PopulateDailyDepartures(dailyFlights);
+        FlightManager.PopulateDailyArrivals(dailyArrivals);
 
         Debug.Log(dailyFlights.Count);
-        
+        AirportController.instance = this;
 	}
 	
 	// Update is called once per frame
@@ -49,16 +61,10 @@ public class AirportController : MonoBehaviour {
         // Update game time
         time = time.AddSeconds(Time.deltaTime * gameTimeScale);
 
-        if (dailyFlights.Count > 0)
-        {
-            Flight f = dailyFlights[0];
-            if (time > f.DepartureTime)
-            {
-                dailyFlights.Remove(f);
-            }
-        }
+        foreach (Flight f in dailyFlights) f.Update();
+        foreach (Flight f in dailyArrivals) f.Update();
     }
 
-
+    public static AirportController instance;
 
 }

@@ -92,7 +92,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1489690863367658}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.72, y: 4.88, z: 14.01}
+  m_LocalPosition: {x: 1.6688817, y: 7.138515, z: 1.9480491}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4580758012243344}
@@ -266,9 +266,11 @@ MonoBehaviour:
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: BCN
+  m_Text: 'BCN
+
+    FCO'
 --- !u!114 &114477036311666528
 MonoBehaviour:
   m_ObjectHideFlags: 1

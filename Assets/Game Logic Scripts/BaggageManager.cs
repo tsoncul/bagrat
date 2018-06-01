@@ -2,10 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class BaggageManager {
+public static class BaggageManager
+{
 
+    public static void PopulateBaggages(List<Baggage> baggages, string destination, string provenance)
+    {
+        for (int i = 0; i < UnityEngine.Random.Range(12, 16); i++)
+        {
+            baggages.Add(new Baggage(destination, provenance));
+        }
+    }
 
+    static void TransferBaggage(Flight arrivingFlight, List<Flight> departures)
+    {
+        List<Flight> legalConnections = new List<Flight>();
 
+        foreach (Flight flt in departures)
+        {
+            if (flt.Time >= arrivingFlight.Time.AddMinutes(45))
+            {
+                legalConnections.Add(flt);
+            }
+        }
+        if (legalConnections.Count > 0)
+        {
+            Flight departingFlight = legalConnections[UnityEngine.Random.Range(0, legalConnections.Count - 1)];
+            arrivingFlight.baggages.Add(new Baggage(departingFlight.Airport, arrivingFlight.Airport));
+        }
+    }
 
 }
 
@@ -68,7 +92,7 @@ public class Baggage
     }
 
     // Constructor
-    public Baggage (string destination, string provenance)
+    public Baggage(string destination, string provenance)
     {
         m_bagSize = new Vector3(Random.Range(0.8f, 1.2f), Random.Range(0.6f, 1.0f), Random.Range(0.8f, 1.5f));
         m_Color = Random.ColorHSV(0.2f, 0.6f, 0.6f, 0.7f);

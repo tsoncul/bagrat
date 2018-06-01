@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LuggageController : MonoBehaviour {
+public class LuggageController : MonoBehaviour
+{
 
-    private bool m_isBaked = false;
     Renderer tagRenderer;
     UnityEngine.UI.Text tagText;
 
@@ -53,22 +53,36 @@ public class LuggageController : MonoBehaviour {
     public void BakeValues()
     {
         // Set appropriate color for tag.
-        tagRenderer.material.color = Color.green;
+        if (baggageData.Destination == "HOM")
+        {
+            // Arrival bag
+            tagRenderer.material.color = Color.yellow;
+            luggageType = LuggageType.ARRIVAL;
+        }
+        else if (baggageData.Provenance == "HOM")
+        {
+            // Departure Bag
+            tagRenderer.material.color = Color.green;
+            luggageType = LuggageType.DEPARTURE;
+        } else
+        {
+            // Transfer bag
+            tagRenderer.material.color = Color.blue;
+            luggageType = LuggageType.TRANSFER;
+        }
+
 
         // Set luggage color
-        //GetComponent<Renderer>().material.color = Color.gray;
         GetComponent<Renderer>().material.color = baggageData.Color;
 
         // Set luggage size
-        //transform.localScale = new Vector3(Random.Range(0.8f, 1.2f), Random.Range(0.6f, 1.0f), Random.Range(0.8f, 1.5f));
+        
         transform.localScale = baggageData.BagSize;
-        //tagRenderer.GetComponent<Transform>().localPosition = new Vector3(0.0f, transform.localScale.y / 2 + 0.1f, 0.0f);
-
-        tagText.text = baggageData.Destination;
-
+        
+        tagText.text = baggageData.Provenance + "\n" + baggageData.Destination;
 
 
-        m_isBaked = true;
+
     }
 
 
@@ -79,4 +93,10 @@ public class LuggageController : MonoBehaviour {
         TRANSFER
     }
 
+
+    // Disconnect physical object from persistent Baggage object.
+    private void OnDestroy()
+    {
+
+    }
 }
