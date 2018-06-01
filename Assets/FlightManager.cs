@@ -32,11 +32,10 @@ public class Flight
 
     void InitializeBaggages()
     {
-        //Debug.Log(m_Destination);
         baggages = new List<Baggage>();
         for (int i=0;i<UnityEngine.Random.Range(10,15);i++)
         {
-            this.baggages.Add(new Baggage(m_Destination));
+            this.baggages.Add(new Baggage(m_Destination, "HOM"));
         }
     }
 

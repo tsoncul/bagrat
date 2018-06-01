@@ -35,20 +35,4 @@ public class AirportController : MonoBehaviour {
 
 
 
-    //// Flight class that keeps track of a single flight and its luggage.
-    //public class Flight
-    //{
-    //    public DateTime departureTime;
-    //    public string destination;
-
-    //    LuggageController.Luggage[] luggagesInFlight;
-
-    //    public Flight(string destination, DateTime date)
-    //    {
-    //        this.destination = destination;
-    //        this.departureTime = date;
-
-
-    //    }
-    //}
 }

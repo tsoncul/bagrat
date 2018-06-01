@@ -25,6 +25,7 @@ public class Baggage
 
     // Game attributes, destination etc.
     private string m_Destination;
+    private string m_Provenance;
     private string m_PaxName;
 
     // Connected GameObject
@@ -57,13 +58,23 @@ public class Baggage
         }
     }
 
+    public string Provenance
+    {
+        get
+        {
+            return m_Provenance;
+        }
+
+    }
+
     // Constructor
-    public Baggage (string destination)
+    public Baggage (string destination, string provenance)
     {
         m_bagSize = new Vector3(Random.Range(0.8f, 1.2f), Random.Range(0.6f, 1.0f), Random.Range(0.8f, 1.5f));
         m_Color = Random.ColorHSV(0.2f, 0.6f, 0.6f, 0.7f);
 
         m_Destination = destination;
+        m_Provenance = provenance;
         m_PaxName = "Smith";
     }
 
