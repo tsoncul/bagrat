@@ -19,6 +19,14 @@ public class AirportController : MonoBehaviour {
 
     }
 
+    public List<Flight> DailyFlights
+    {
+        get
+        {
+            return dailyFlights;
+        }
+    }
+
     // Flights Register
     private List<Flight> dailyFlights;
 
@@ -40,7 +48,16 @@ public class AirportController : MonoBehaviour {
 	void Update () {
         // Update game time
         time = time.AddSeconds(Time.deltaTime * gameTimeScale);
-	}
+
+        if (dailyFlights.Count > 0)
+        {
+            Flight f = dailyFlights[0];
+            if (time > f.DepartureTime)
+            {
+                dailyFlights.Remove(f);
+            }
+        }
+    }
 
 
 

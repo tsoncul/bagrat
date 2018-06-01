@@ -15,6 +15,15 @@ public static class FlightManager {
 
             flights.Add(new Flight(randDest, randTime));
         }
+
+        flights.Sort(delegate(Flight x, Flight y)
+        {
+            if (x.DepartureTime == null && y.DepartureTime == null) return 0;
+            else if (x.DepartureTime == null) return -1;
+            else if (y.DepartureTime == null) return 1;
+            else return x.DepartureTime.CompareTo(y.DepartureTime);
+        });
+
     }
     
 }
@@ -31,7 +40,23 @@ public class Flight
     // all baggages the Player should load into the flight.
     // This manifest will be checked against the "loaded baggage" at departure.
     public List<Baggage> baggages;
-        
+
+    public DateTime DepartureTime
+    {
+        get
+        {
+            return m_DepartureTime;
+        }
+    }
+
+    public string Destination
+    {
+        get
+        {
+            return m_Destination;
+        }
+    }
+
     // Constructors
     public Flight(string destination, DateTime departure)
     {
@@ -50,4 +75,8 @@ public class Flight
         }
     }
 
+    public override string ToString()
+    {
+        return m_Destination + " - " + m_DepartureTime.ToShortTimeString();
+    }
 }
