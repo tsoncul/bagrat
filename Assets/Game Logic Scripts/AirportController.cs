@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -49,6 +49,8 @@ public class AirportController : MonoBehaviour {
         // Initialize the daily flights list
         dailyFlights = new List<Flight>();
         dailyArrivals = new List<Flight>();
+
+// Populate both daily flight lists through FlightManager.
         FlightManager.PopulateDailyDepartures(dailyFlights);
         FlightManager.PopulateDailyArrivals(dailyArrivals);
 
