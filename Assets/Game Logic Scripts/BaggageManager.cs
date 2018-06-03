@@ -27,7 +27,7 @@ public static class BaggageManager
         if (legalConnections.Count > 0)
         {
             Flight departingFlight = legalConnections[UnityEngine.Random.Range(0, legalConnections.Count - 1)];
-            arrivingFlight.baggages.Add(new Baggage(departingFlight.Airport, arrivingFlight.Airport));
+            arrivingFlight.registeredBaggages.Add(new Baggage(departingFlight.Airport, arrivingFlight.Airport));
         }
     }
 

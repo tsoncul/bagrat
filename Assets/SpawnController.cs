@@ -14,7 +14,7 @@ public class SpawnController : MonoBehaviour
     void Start()
     {
         flt = new Flight("BJN", new System.DateTime(), Flight.FlightType.DEPARTURE);
-        Debug.Log(flt.baggages);
+        Debug.Log(flt.registeredBaggages);
     }
 
     // Update is called once per frame
@@ -25,10 +25,10 @@ public class SpawnController : MonoBehaviour
         if (countdown < 0)
         {
             countdown = Random.Range(0.5f, 1.2f);
-            if (flt.baggages.Count > 0)
+            if (flt.registeredBaggages.Count > 0)
             {
-                Baggage bag = flt.baggages[0];
-                flt.baggages.Remove(bag);
+                Baggage bag = flt.registeredBaggages[0];
+                flt.registeredBaggages.Remove(bag);
 
                 GameObject bagObject = Instantiate(luggage, transform.position, transform.rotation);
                 LuggageController lc = bagObject.GetComponent<LuggageController>();

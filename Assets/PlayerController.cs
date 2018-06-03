@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
     {
         if (objectInHand != null)
         {
-            objectInHand.GetComponent<Rigidbody>().MovePosition(cameraTransform.position + cameraTransform.forward * 3f);
+            objectInHand.GetComponent<Rigidbody>().MovePosition(cameraTransform.position + cameraTransform.forward * 1f);
             if (objectInHand.straining)
             {
                 objectInHand.OnDrop();

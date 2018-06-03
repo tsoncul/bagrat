@@ -54,7 +54,8 @@ public class Flight
     // This list is ideally constructed at creation and is a list of
     // all baggages the Player should load into the flight.
     // This manifest will be checked against the "loaded baggage" at departure.
-    public List<Baggage> baggages;
+    public List<Baggage> registeredBaggages;
+    public List<Baggage> loadedBaggages;
 
     public DateTime Time
     {
@@ -102,17 +103,35 @@ public class Flight
 
     void InitializeBaggages()
     {
-        baggages = new List<Baggage>();
+        registeredBaggages = new List<Baggage>();
         if (m_flightType == FlightType.DEPARTURE)
         {
-            BaggageManager.PopulateBaggages(baggages, m_Airport, "HOM");
+            BaggageManager.PopulateBaggages(registeredBaggages, m_Airport, "HOM");
         }
         else
         {
-            BaggageManager.PopulateBaggages(baggages, "HOM", m_Airport);
+            BaggageManager.PopulateBaggages(registeredBaggages, "HOM", m_Airport);
         }
     }
 
+    public void LoadBaggage(Baggage bag)
+    {
+        loadedBaggages.Add(bag);
+    } 
+
+    public Baggage UnloadBaggage()
+    {
+        Baggage bag;
+        if (loadedBaggages.Count > 0)
+        {
+            bag = loadedBaggages[0];
+            loadedBaggages.Remove(bag);
+            return bag;
+        }
+        else return null;
+    }
+
+    // Flight State Manager. This needs a much better solution.
     public void Update()
     {
         switch (m_Status)

@@ -15,6 +15,15 @@ public class LuggageController : MonoBehaviour
 
     private Baggage baggageData;
 
+    public Baggage BaggageData
+    {
+        get
+        {
+            return baggageData;
+        }
+
+    }
+
     // Need data for:
     // Type: departure, arrival, transfer
     // Destination, Provenance...

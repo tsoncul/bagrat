@@ -54,7 +54,6 @@ public class AirportController : MonoBehaviour {
         FlightManager.PopulateDailyDepartures(dailyFlights);
         FlightManager.PopulateDailyArrivals(dailyArrivals);
 
-        Debug.Log(dailyFlights.Count);
         AirportController.instance = this;
 	}
 	
@@ -63,6 +62,7 @@ public class AirportController : MonoBehaviour {
         // Update game time
         time = time.AddSeconds(Time.deltaTime * gameTimeScale);
 
+        // Update Flight state machines.
         foreach (Flight f in dailyFlights) f.Update();
         foreach (Flight f in dailyArrivals) f.Update();
     }
