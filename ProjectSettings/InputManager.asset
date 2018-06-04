@@ -297,11 +297,11 @@ InputManager:
     m_Name: Flip
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: q
-    positiveButton: e
+    negativeButton: e
+    positiveButton: q
     altNegativeButton: 
     altPositiveButton: 
-    gravity: 0
+    gravity: 1000
     dead: 0.001
     sensitivity: 1
     snap: 0

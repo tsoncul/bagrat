@@ -578,7 +578,6 @@ GameObject:
   - component: {fileID: 586560385}
   - component: {fileID: 586560387}
   - component: {fileID: 586560386}
-  - component: {fileID: 586560390}
   - component: {fileID: 586560388}
   - component: {fileID: 586560389}
   m_Layer: 0
@@ -651,28 +650,6 @@ MonoBehaviour:
   walkSpeed: 3
   interactDistance: 5
   carryDistance: 3
---- !u!145 &586560390
-SpringJoint:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 586560384}
-  m_ConnectedBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 0.85, z: 1}
-  m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 3.9146295, y: 2.6100001, z: 5.4587665}
-  serializedVersion: 2
-  m_Spring: 10
-  m_Damper: 0.2
-  m_MinDistance: 0
-  m_MaxDistance: 0
-  m_Tolerance: 0.025
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 1
-  m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
 --- !u!1 &709701828
 GameObject:
   m_ObjectHideFlags: 0

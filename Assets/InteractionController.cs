@@ -44,15 +44,17 @@ public class InteractionController : MonoBehaviour
     public void OnPickup()
     {
         GetComponent<Rigidbody>().useGravity = false;
-        GetComponent<Rigidbody>().isKinematic = true;
+        //GetComponent<Rigidbody>().isKinematic = true;
+        GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
     }
 
     public void OnDrop()
     {
 
         GetComponent<Rigidbody>().useGravity = true;
-        GetComponent<Rigidbody>().isKinematic = false;
+        //GetComponent<Rigidbody>().isKinematic = false;
         straining = false;
+        GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
     }
 
 }
